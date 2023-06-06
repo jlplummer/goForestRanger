@@ -21,9 +21,9 @@ func (r *Ranger) Init(x, y int) {
 	r.X = x
 	r.Y = y
 
-	r.Image, _, err = ebitenutil.NewImageFromFile("media/ranger.png")
+	r.Image, _, err = ebitenutil.NewImageFromFile("media/ranger_8x8.png")
 	if err != nil {
-		log.Fatal("Cannot open ranger.png")
+		log.Fatal("Cannot open ranger_8x8.png")
 	}
 }
 
