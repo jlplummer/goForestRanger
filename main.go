@@ -10,8 +10,35 @@ import (
 )
 
 const (
+	Caption      = "goForestRanger"
 	ScreenWidth  = 600
 	ScreenHeight = 300
+
+	PlayerHeight = 24
+	PlayerWidth  = 21
+
+	TileHeight = 4
+	TileWidth  = 8
+
+	ItemHeight = 8
+	ItemWidth  = 8
+
+	SpriteFactor = 3.0
+
+	FootmanHeight = 8
+	FootmanWidth  = 8
+
+	KnightHeight = 16
+	KnightWidth  = 19
+
+	EnemyCooldown     = 200
+	CollisionDistance = 20
+	ArrowCooldown     = 10
+	DaggerCooldown    = 10
+
+	PlayerMove = 8 * SpriteFactor
+
+	ButtonCooldown = 500 // milliseconds
 )
 
 var (
@@ -44,7 +71,7 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeigh
 
 func main() {
 	ebiten.SetWindowSize(ScreenWidth, ScreenHeight)
-	ebiten.SetWindowTitle("goForestRanger")
+	ebiten.SetWindowTitle(Caption)
 	if err := ebiten.RunGame(&Game{}); err != nil {
 		log.Fatal(err)
 	}
