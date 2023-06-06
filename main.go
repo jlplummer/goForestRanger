@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+	"goForestRanger/pkg/entities"
 	"log"
 
 	_ "image/png"
@@ -42,27 +44,47 @@ const (
 )
 
 var (
-	RangerImage *ebiten.Image
+	ranger      entities.Ranger
+	initCalled  int
+	last_move_y int
 )
 
 func init() {
-	var err error
-	RangerImage, _, err = ebitenutil.NewImageFromFile("media/ranger.png")
-	if err != nil {
-		log.Fatal(err)
-	}
+	ranger.Init(0, 0)
+	initCalled++
 }
 
 type Game struct{}
 
 func (g *Game) Update() error {
+	var move_y int
+
+	if ebiten.IsKeyPressed(ebiten.KeyArrowUp) {
+		move_y -= ranger.Height()
+	}
+
+	if ebiten.IsKeyPressed(ebiten.KeyArrowDown) {
+		move_y += ranger.Height()
+	}
+
+	ranger.Update(move_y)
+
+	last_move_y = move_y
 	return nil
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-	op := &ebiten.DrawImageOptions{}
-	op.GeoM.Scale(5, 5)
-	screen.DrawImage(RangerImage, op)
+	ranger.Draw(screen)
+
+	msg := fmt.Sprintf("ranger[x:%d/y:%d]", ranger.X, ranger.Y)
+	ebitenutil.DebugPrintAt(screen, msg, 500, 0)
+
+	msg = fmt.Sprintf("initCalled:%d", initCalled)
+	ebitenutil.DebugPrintAt(screen, msg, 500, 25)
+
+	msg = fmt.Sprintf("move_y:%d", last_move_y)
+	ebitenutil.DebugPrintAt(screen, msg, 500, 50)
+
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
