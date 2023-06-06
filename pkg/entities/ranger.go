@@ -1,6 +1,7 @@
 package entities
 
 import (
+	"goForestRanger/pkg/game"
 	_ "image/png"
 	"log"
 
@@ -30,7 +31,7 @@ func (r *Ranger) Draw(screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
 	op.GeoM.Reset()
 	op.GeoM.Translate(float64(r.X), float64(r.Y))
-	op.GeoM.Scale(3, 3)
+	op.GeoM.Scale(game.SpriteFactor, game.SpriteFactor)
 	screen.DrawImage(r.Image, op)
 }
 
@@ -42,7 +43,7 @@ func (r *Ranger) Update(y int) {
 
 	// dividing screen size by sprite factor and subtracting
 	// sprite height seems to work?
-	if r.Y+y > (300/3)-8 {
+	if r.Y+y > (game.ScreenHeight/game.SpriteFactor)-game.PlayerMove {
 		y = 0
 	}
 	r.Y += y

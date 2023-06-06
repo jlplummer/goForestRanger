@@ -3,44 +3,13 @@ package main
 import (
 	"fmt"
 	"goForestRanger/pkg/entities"
+	"goForestRanger/pkg/game"
 	"log"
 
 	_ "image/png"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
-)
-
-const (
-	Caption      = "goForestRanger"
-	ScreenWidth  = 600
-	ScreenHeight = 300
-
-	PlayerHeight = 24
-	PlayerWidth  = 21
-
-	TileHeight = 4
-	TileWidth  = 8
-
-	ItemHeight = 8
-	ItemWidth  = 8
-
-	SpriteFactor = 3.0
-
-	FootmanHeight = 8
-	FootmanWidth  = 8
-
-	KnightHeight = 16
-	KnightWidth  = 19
-
-	EnemyCooldown     = 200
-	CollisionDistance = 20
-	ArrowCooldown     = 10
-	DaggerCooldown    = 10
-
-	PlayerMove = 8 * SpriteFactor
-
-	ButtonCooldown = 500 // milliseconds
 )
 
 var (
@@ -88,12 +57,12 @@ func (g *Game) Draw(screen *ebiten.Image) {
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
-	return ScreenWidth, ScreenHeight
+	return game.ScreenWidth, game.ScreenHeight
 }
 
 func main() {
-	ebiten.SetWindowSize(ScreenWidth, ScreenHeight)
-	ebiten.SetWindowTitle(Caption)
+	ebiten.SetWindowSize(game.ScreenWidth, game.ScreenHeight)
+	ebiten.SetWindowTitle(game.Caption)
 	if err := ebiten.RunGame(&Game{}); err != nil {
 		log.Fatal(err)
 	}
