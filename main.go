@@ -34,6 +34,7 @@ func (g *Game) Update() error {
 
 func (g *Game) Draw(screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
+	op.GeoM.Scale(5, 5)
 	screen.DrawImage(RangerImage, op)
 }
 
