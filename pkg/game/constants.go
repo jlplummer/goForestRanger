@@ -8,7 +8,7 @@ const (
 	PlayerHeight = 24
 	PlayerWidth  = 21
 
-	TileHeight = 4
+	TileHeight = 8
 	TileWidth  = 8
 
 	ItemHeight = 8
@@ -28,4 +28,6 @@ const (
 	DaggerCooldown    = 10
 
 	PlayerMove = 8
+
+	MaxGrassTiles = 8
 )

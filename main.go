@@ -14,12 +14,14 @@ import (
 
 var (
 	ranger      entities.Ranger
+	background  entities.Background
 	initCalled  int
 	last_move_y int
 )
 
 func init() {
 	ranger.Init(0, 0)
+	background.Init()
 	initCalled++
 }
 
@@ -43,6 +45,7 @@ func (g *Game) Update() error {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
+	background.Draw(screen)
 	ranger.Draw(screen)
 
 	msg := fmt.Sprintf("ranger[x:%d/y:%d]", ranger.X, ranger.Y)
@@ -53,7 +56,6 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	msg = fmt.Sprintf("move_y:%d", last_move_y)
 	ebitenutil.DebugPrintAt(screen, msg, 500, 50)
-
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
