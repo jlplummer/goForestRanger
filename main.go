@@ -5,6 +5,7 @@ import (
 	"goForestRanger/pkg/entities"
 	"goForestRanger/pkg/game"
 	"log"
+	"os"
 
 	_ "image/png"
 
@@ -29,6 +30,10 @@ type Game struct{}
 
 func (g *Game) Update() error {
 	var move_y int
+
+	if ebiten.IsKeyPressed(ebiten.KeyEscape) {
+		os.Exit(0)
+	}
 
 	if ebiten.IsKeyPressed(ebiten.KeyArrowUp) {
 		move_y -= ranger.Height()
